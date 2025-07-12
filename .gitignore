@@ -1,0 +1,6 @@
+.env
+cookies.json
+.venv/
+
+data/
+data_with_sentiment/
