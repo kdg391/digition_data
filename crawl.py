@@ -17,10 +17,9 @@ KEYWORDS = ["SKT", "유심"]
 TIMELINES: List[date] = [
     # date(2025, 4, 18),  # 1. 침해 사실 내부 인지
     # date(2025, 4, 22),  # 2. KISA 신고
-    #date(2025, 4, 28),  # 3. 대국민 사과
-    date(2025, 4, 29), ######
-    date(2025, 5, 7),   # 4. SK그룹 회장 사과
-    date(2025, 5, 19),  # 5. 민관 합동 조사 1차
+    # date(2025, 4, 28),  # 3. 대국민 사과
+    # date(2025, 5, 7),   # 4. SK그룹 회장 사과
+    # date(2025, 5, 19),  # 5. 민관 합동 조사 1차
     date(2025, 6, 13),  # 6. 위약금 논란 조사
     date(2025, 6, 16),  # 7. 국제 공조
     date(2025, 6, 30),  # 8. 정부 권고 & 보상안
@@ -66,7 +65,7 @@ TS_RE = re.compile(r"^\d{10}(?:\d{3})?$")   # 10~13자리 숫자(초/밀리초 e
 #         import pytz
 #         return dt.astimezone(pytz.timezone("Asia/Seoul"))
 
-async def prevent_rate_limit(base: float = 14.5, jitter: float = 6.3) -> None:
+async def prevent_rate_limit(base: float = 15.5, jitter: float = 6.3) -> None:
     await asyncio.sleep(base + random.random() * jitter)
 
 async def fetch_day(

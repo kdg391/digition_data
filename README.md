@@ -9,7 +9,13 @@
 ## 속성
 
 |이름|설명|예시|
-|----------|------------|---|
-|created_at|트윗 작성 시간|2025-04-23 06:57:17|
+|-|-|-|
+|created_at|트윗 작성 시간(YYYY-mm-DD HH-MM-SS)|2025-04-23 06:57:17|
 |text|트윗 내용|당장은 유심 잠금이라도 해놔야… 오늘 가서 유심 바꾸던가 해야겠다. SKT놈들이 공짜로 해줘야 하는거 아니냐!!|
 |sentiment|감정 분석 결과(positive, negative) - 긍정, 부정|positive|
+
+## 감정 분석 모델
+
+<https://huggingface.co/sangrimlee/bert-base-multilingual-cased-nsmc>
+
+[Naver sentiment movie corpus](https://github.com/e9t/nsmc) 데이터를 파인 튜닝한 한국어 감정 분석 모델
