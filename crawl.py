@@ -14,7 +14,7 @@ from twikit import Client, Tweet
 
 KEYWORDS = ["SKT", "유심"]
 
-TIMELINE_ANCHORS: List[date] = [
+TIMELINES: List[date] = [
     # date(2025, 4, 18),  # 1. 침해 사실 내부 인지
     # date(2025, 4, 22),  # 2. KISA 신고
     #date(2025, 4, 28),  # 3. 대국민 사과
@@ -66,11 +66,9 @@ TS_RE = re.compile(r"^\d{10}(?:\d{3})?$")   # 10~13자리 숫자(초/밀리초 e
 #         import pytz
 #         return dt.astimezone(pytz.timezone("Asia/Seoul"))
 
-async def prevent_rate_limit(base: float = 12.5, jitter: float = 6.3) -> None:
+async def prevent_rate_limit(base: float = 14.5, jitter: float = 6.3) -> None:
     await asyncio.sleep(base + random.random() * jitter)
 
-# ────────────────────────────────────────────────────────────────────────────────
-# 3. 트윗 수집 로직 ───────────────────────────────────────────────────────────────
 async def fetch_day(
     client: Client,
     keyword: str,
@@ -138,7 +136,7 @@ async def main() -> None:
     data_dir.mkdir(exist_ok=True)
 
     tasks = []
-    for anchor in TIMELINE_ANCHORS:
+    for anchor in TIMELINES:
         for delta in (-1, 0, 1):
             day = anchor + timedelta(days=delta)
             for kw in KEYWORDS:

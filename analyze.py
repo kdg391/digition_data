@@ -36,7 +36,7 @@ def main():
     print(f"총 {len(csv_files)}개 파일 처리 시작")
     for fp in csv_files:
         name = Path(fp).name
-        print(f"  ↳ {name}")
+        print(f" ㄴ {name}")
         df = pd.read_csv(fp, encoding="utf-8-sig")
         df = annotate_df(df)
         out_path = OUT_DIR / name
