@@ -4,7 +4,7 @@ import os
 import random
 import re
 import sys
-from datetime import date, timedelta, datetime, timezone
+from datetime import date, timedelta
 from pathlib import Path
 from typing import List, Dict
 
@@ -15,17 +15,19 @@ from twikit import Client, Tweet
 KEYWORDS = ["SKT", "유심"]
 
 TIMELINES: List[date] = [
-    # date(2025, 4, 18),  # 1. 침해 사실 내부 인지
-    # date(2025, 4, 22),  # 2. KISA 신고
-    # date(2025, 4, 28),  # 3. 대국민 사과
-    # date(2025, 5, 7),   # 4. SK그룹 회장 사과
-    # date(2025, 5, 19),  # 5. 민관 합동 조사 1차
+    date(2025, 4, 18),  # 1. 침해 사실 내부 인지
+    date(2025, 4, 22),  # 2. KISA 신고
+    date(2025, 4, 28),  # 3. 대국민 사과
+    date(2025, 5, 7),   # 4. SK그룹 회장 사과
+    date(2025, 5, 19),  # 5. 민관 합동 조사 1차
     date(2025, 6, 13),  # 6. 위약금 논란 조사
     date(2025, 6, 16),  # 7. 국제 공조
     date(2025, 6, 30),  # 8. 정부 권고 & 보상안
     date(2025, 7, 4),   # 9. 최종 조사 결과 발표
     date(2025, 7, 7),   # 10. (후속 여론 확인용)
 ]
+
+MAX_DATA_LIMIT = 1100
 
 URL_RE = re.compile(r"https?://\S+|www\.\S+")
 
@@ -72,7 +74,7 @@ async def fetch_day(
     client: Client,
     keyword: str,
     day: date,
-    limit: int = 1100,
+    limit: int,
 ) -> List[Dict]:
     since_str = day.isoformat()
     until_str = (day + timedelta(days=1)).isoformat()
@@ -142,7 +144,7 @@ async def main() -> None:
                 tasks.append((kw, day))
 
     for kw, day in tasks:
-        rows = await fetch_day(client, kw, day)
+        rows = await fetch_day(client, kw, day, MAX_DATA_LIMIT)
         # 저장
         out_path = data_dir / f"{kw}_{day.strftime('%Y%m%d')}.csv"
         with out_path.open("w", newline="", encoding="utf-8-sig") as f:

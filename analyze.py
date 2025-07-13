@@ -5,7 +5,7 @@ import pandas as pd
 from tqdm import tqdm
 from transformers import pipeline
 
-DATA_DIR = Path("data")
+DATA_DIR = Path("aa")
 OUT_DIR = Path("data_with_sentiment")
 OUT_DIR.mkdir(exist_ok=True)
 
@@ -24,6 +24,7 @@ def annotate_df(df: pd.DataFrame) -> pd.DataFrame:
 
     df_out = df.copy()
     df_out["sentiment"] = [r["label"] for r in results]
+    df_out["score"] = [r["score"] if r["label"] == "positive" else 1.0 - r["score"] for r in results]
     df_out = df_out.drop(columns=["like_count"], errors="ignore")
     return df_out
 
