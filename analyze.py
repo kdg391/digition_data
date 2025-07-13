@@ -5,7 +5,7 @@ import pandas as pd
 from tqdm import tqdm
 from transformers import pipeline
 
-DATA_DIR = Path("aa")
+DATA_DIR = Path("data")
 OUT_DIR = Path("data_with_sentiment")
 OUT_DIR.mkdir(exist_ok=True)
 
